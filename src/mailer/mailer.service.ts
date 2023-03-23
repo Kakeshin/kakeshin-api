@@ -5,6 +5,10 @@ import { Mailer } from './mailer.interface';
 @Injectable()
 export class MailerService {
   async getHello(mailer: Mailer): Promise<string> {
+    if (mailer.token !== process.env.TOKEN) {
+      return 'Bad Send';
+    }
+
     try {
       const transport = nodemailer.createTransport({
         host: process.env.SMTP_ADDRESS,
