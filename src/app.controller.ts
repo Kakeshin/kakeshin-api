@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
+  @Get('/hello')
   getHello(@Res() res: Response) {
     res.status(HttpStatus.OK).json(this.appService.getName());
   }
