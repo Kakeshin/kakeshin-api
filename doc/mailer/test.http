@@ -1,0 +1,10 @@
+#### Post
+
+POST http://localhost:3000/mailer
+Content-Type: application/json
+
+{
+  "name": "小野",
+  "address": "",
+  "message": "Axe Axe Axe Axe"
+}
