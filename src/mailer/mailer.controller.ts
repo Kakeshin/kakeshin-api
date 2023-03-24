@@ -5,8 +5,10 @@ import MailerService from './mailer.service';
 
 @Controller()
 export default class MailerController {
+  constructor(private readonly mailerService: MailerService) {}
+
   @Post('mailer')
   async findAll(@Body() mailer: Mailer, @Res() res: Response) {
-    res.status(HttpStatus.OK).json(await MailerService.getHello(mailer));
+    res.status(HttpStatus.OK).json(await this.mailerService.getHello(mailer));
   }
 }
