@@ -11,7 +11,7 @@ export default class AppController {
     res.status(HttpStatus.OK).json(this.appService.getName());
   }
 
-  @Post('/hello')
+  @Post('/postHello')
   async postHello(@Res() res: Response) {
     res
       .status(HttpStatus.OK)
