@@ -13,10 +13,6 @@ export default class AppController {
 
   @Post('/postHello')
   postHello(@Res() res: Response) {
-    res
-      .status(HttpStatus.OK)
-      .json(
-        JSON.stringify({ name: `Post: ${this.appService.asyncGetName()}` })
-      );
+    res.status(HttpStatus.OK).json({ name: this.appService.asyncGetName() });
   }
 }
