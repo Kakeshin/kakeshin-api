@@ -27,6 +27,8 @@ export default class MailerService {
         html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
       });
 
+      console.error(result);
+
       return result.response;
     } catch (err) {
       return err.string;
