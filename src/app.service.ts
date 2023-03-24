@@ -10,4 +10,8 @@ export default class AppService {
   getName(): App {
     return this.app;
   }
+
+  async asyncGetName(): Promise<App> {
+    return this.app;
+  }
 }
