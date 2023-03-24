@@ -9,13 +9,9 @@ interface ResultInterface {
 @Injectable()
 export default class MailerService {
   async getHello(mailer: Mailer): Promise<ResultInterface> {
-    const { token } = mailer;
-    const envToken = process.env.TOKEN;
-    console.log(mailer);
-    // if (token != envToken) {
-    //   console.error('Token Error');
-    //   return { message: 'Bad Send' };
-    // }
+    if (mailer.token !== process.env.TOKEN) {
+      return { message: 'Bad Send' };
+    }
 
     try {
       const transport = nodemailer.createTransport({
@@ -34,7 +30,6 @@ export default class MailerService {
         subject: 'お問合せ',
         html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
       });
-      console.log('Service End:', result);
       return { message: result.response };
     } catch (err) {
       return { message: err };
