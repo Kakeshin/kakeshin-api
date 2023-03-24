@@ -13,7 +13,7 @@ export default class MailerController {
     const result = await this.mailerService.getHello(mailer);
     console.log('Api End: ', result);
     await new Promise<string>(() => {
-      res.status(HttpStatus.OK).json({ result });
+      res.status(HttpStatus.OK).json({ message: result });
     });
   }
 }
