@@ -11,6 +11,7 @@ export default class MailerController {
   async findAll(@Body() mailer: Mailer, @Res() res: Response) {
     console.log('Api Start');
     const result = await this.mailerService.getHello(mailer);
+    console.log('Api End: ', result);
     await new Promise<string>(() => {
       res.status(HttpStatus.OK).json(result);
     });
