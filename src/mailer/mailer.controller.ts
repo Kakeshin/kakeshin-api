@@ -6,7 +6,7 @@ import MailerService from './mailer.service';
 @Controller()
 export default class MailerController {
   @Post('mailer')
-  static async findAll(@Body() mailer: Mailer, @Res() res: Response) {
+  async findAll(@Body() mailer: Mailer, @Res() res: Response) {
     res.status(HttpStatus.OK).json(await MailerService.getHello(mailer));
   }
 }
