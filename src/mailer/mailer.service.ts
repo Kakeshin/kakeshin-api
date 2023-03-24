@@ -2,15 +2,19 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Mailer } from './mailer.interface';
 
+interface ResultInterface {
+  message: string;
+}
+
 @Injectable()
 export default class MailerService {
-  async getHello(mailer: Mailer): Promise<string> {
+  async getHello(mailer: Mailer): Promise<ResultInterface> {
     const { token } = mailer;
     const envToken = process.env.TOKEN;
     console.log(typeof mailer.token, typeof process.env.TOKEN);
     if (token !== envToken) {
       console.error('Token Error');
-      return 'Bad Send';
+      return { message: 'Bad Send' };
     }
 
     try {
@@ -35,7 +39,7 @@ export default class MailerService {
         .catch((err) => err.string);
 
       console.log('Service End:', result);
-      return await result;
+      return { message: await result };
     } catch (err) {
       return err.string;
     }
