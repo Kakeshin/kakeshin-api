@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
+import { Controller, Get, Post, HttpStatus, Res } from '@nestjs/common';
 import { Response } from 'express';
 import AppService from './app.service';
 
@@ -9,5 +9,10 @@ export default class AppController {
   @Get('/hello')
   getHello(@Res() res: Response) {
     res.status(HttpStatus.OK).json(this.appService.getName());
+  }
+
+  @Post('/hello')
+  postHello(@Res() res: Response) {
+    res.status(HttpStatus.OK).json(`Post: ${this.appService.getName()}`);
   }
 }
