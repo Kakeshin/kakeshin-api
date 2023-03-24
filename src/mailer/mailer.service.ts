@@ -20,25 +20,16 @@ export default class MailerService {
         },
       });
 
-      // const result = await transport.sendMail({
-      //   from: process.env.ACCOUNT_ADDRESS,
-      //   to: mailer.address,
-      //   subject: 'お問合せ',
-      //   html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
-      // });
+      const result = transport
+        .sendMail({
+          from: process.env.ACCOUNT_ADDRESS,
+          to: mailer.address,
+          subject: 'お問合せ',
+          html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
+        })
+        .then(res => res.response);
 
-      // return result.response;
-
-      return await new Promise<string>(() => {
-        transport
-          .sendMail({
-            from: process.env.ACCOUNT_ADDRESS,
-            to: mailer.address,
-            subject: 'お問合せ',
-            html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
-          })
-          .then(res => res.response);
-      });
+      return await result;
     } catch (err) {
       return err.string;
     }
