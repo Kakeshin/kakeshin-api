@@ -11,6 +11,7 @@ export default class MailerService {
   async getHello(mailer: Mailer): Promise<ResultInterface> {
     const { token } = mailer;
     const envToken = process.env.TOKEN;
+    console.log(mailer);
     // if (token != envToken) {
     //   console.error('Token Error');
     //   return { message: 'Bad Send' };
