@@ -1,14 +1,12 @@
-import { Controller, Post, Res, Req, Body, HttpStatus } from '@nestjs/common';
+import { Controller, Post, Res, Body, HttpStatus } from '@nestjs/common';
 import { Response } from 'express';
 import { Mailer } from './mailer.interface';
-import { MailerService } from './mailer.service';
+import MailerService from './mailer.service';
 
 @Controller('mailer')
-export class MailerController {
-  constructor(private readonly mailerService: MailerService) {}
-
+export default class MailerController {
   @Post()
-  async findAll(@Body() mailer: Mailer, @Res() res: Response) {
-    res.status(HttpStatus.OK).json(await this.mailerService.getHello(mailer));
+  static async findAll(@Body() mailer: Mailer, @Res() res: Response) {
+    res.status(HttpStatus.OK).json(await MailerService.getHello(mailer));
   }
 }

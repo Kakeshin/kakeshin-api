@@ -3,9 +3,9 @@ import * as nodemailer from 'nodemailer';
 import { Mailer } from './mailer.interface';
 
 @Injectable()
-export class MailerService {
-  async getHello(mailer: Mailer): Promise<string> {
-    if (mailer.token != process.env.TOKEN) {
+export default class MailerService {
+  static async getHello(mailer: Mailer): Promise<string> {
+    if (mailer.token !== `${process.env.TOKEN}`) {
       return 'Bad Send';
     }
 
@@ -29,8 +29,7 @@ export class MailerService {
 
       return result.response;
     } catch (err) {
-      console.log('--- Error ---');
-      console.log(err);
+      return err.string;
     }
   }
 }
