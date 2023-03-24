@@ -9,6 +9,9 @@ export default class MailerController {
 
   @Post('mailer')
   async findAll(@Body() mailer: Mailer, @Res() res: Response) {
-    res.status(HttpStatus.OK).json(await this.mailerService.getHello(mailer));
+    const result = await this.mailerService.getHello(mailer);
+    await new Promise<string>(() => {
+      res.status(HttpStatus.OK).json(result);
+    });
   }
 }
