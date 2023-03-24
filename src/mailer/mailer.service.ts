@@ -5,7 +5,7 @@ import { Mailer } from './mailer.interface';
 @Injectable()
 export default class MailerService {
   async getHello(mailer: Mailer): Promise<string> {
-    console.log('Service Start');
+    console.log('Service Start', mailer.token, process.env.TOKEN);
     if (`${mailer.token}` !== `${process.env.TOKEN}`) {
       console.error('Token Error');
       return 'Bad Send';
