@@ -28,8 +28,8 @@ export default class MailerService {
       });
 
       return result.response;
-    } catch (err) {
-      return err.string;
+    } catch (error) {
+      return `Error: ${error}`;
     }
   }
 }
