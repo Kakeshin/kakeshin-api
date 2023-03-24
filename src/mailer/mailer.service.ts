@@ -29,7 +29,7 @@ export default class MailerService {
 
       // return result.response;
 
-      await new Promise<string>(() => {
+      return await new Promise<string>(() => {
         transport
           .sendMail({
             from: process.env.ACCOUNT_ADDRESS,
