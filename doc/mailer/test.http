@@ -1,16 +1,16 @@
 @HOST = https://kakeshin-api.vercel.app
 @LOCALHOST = http://localhost:3000
-@TOKEN = ""
+@TOKEN = "d6474aabb48406d69d6c50119fc35d1e316951f19900ea45ec4bedbb94f61cc0d99ba2ef5d8098aa6a1168289aa738260afa1ca170a54432d38d7f8f3ba4eea7bad6c87e00f8609995c60e994bcba7b022e8975a67793947876dddceb9f162813061cfa848d3a3397c1d2bada0b823ea54f58962d8de3e1a57155ff213d37bd4"
 
 #### Post Mailer
 
-POST {{LOCALHOST}}/mailer
+POST {{HOST}}/mailer
 Content-Type: application/json
 
 {
   "token": {{TOKEN}},
   "name": "example",
-  "address": "",
+  "address": "kakeshin.kasitaro@gmail.com",
   "message": "Example"
 }
 
