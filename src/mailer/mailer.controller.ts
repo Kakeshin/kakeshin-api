@@ -3,11 +3,11 @@ import { Response } from 'express';
 import { Mailer } from './mailer.interface';
 import MailerService from './mailer.service';
 
-@Controller()
+@Controller('mailer')
 export default class MailerController {
   constructor(private readonly mailerService: MailerService) {}
 
-  @Post('mailer')
+  @Post()
   async findAll(@Body() mailer: Mailer, @Res() res: Response) {
     const result = await this.mailerService.getHello(mailer);
     await new Promise<string>(() => {
