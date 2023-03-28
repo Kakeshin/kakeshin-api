@@ -16,7 +16,7 @@ export default class GithubService {
         {
           method: 'GET',
           headers: {
-            Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
+            Authorization: `Bearer ${process.env.GITHUB_ACCESS_TOKEN}`,
           },
         }
       );
