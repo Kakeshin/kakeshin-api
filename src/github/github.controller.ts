@@ -7,7 +7,8 @@ export default class GithubController {
   constructor(private readonly service: GithubService) {}
 
   @Get('/me')
-  getGithub(@Res() res: Response) {
-    res.status(HttpStatus.OK).json({ res: this.service.getMe() });
+  async getGithub(@Res() res: Response) {
+    const result = await this.service.getMe();
+    res.status(HttpStatus.OK).json(result);
   }
 }

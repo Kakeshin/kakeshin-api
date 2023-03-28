@@ -2,29 +2,36 @@ import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 
 interface ResultInterface {
-  html_url: string;
+  url: string;
   name: string;
-  twitter_username: string;
-  message: string;
+  twitter: string;
 }
 
 @Injectable()
 export default class GithubService {
   async getMe(): Promise<ResultInterface> {
     try {
-      const result = await axios.get('https://api.github.com/users/Kakeshin');
+      const result = await axios.get(
+        `${process.env.GITHUB_API_URL}/users/Kakeshin`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `token ${process.env.GITHUB_ACCESS_TOKEN}`,
+          },
+        }
+      );
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { html_url, name, twitter_username } = result.data;
       return {
-        html_url: result.data.html_url,
-        name: result.data.name,
-        twitter_username: result.data.twitter_username,
-        message: '',
+        url: html_url,
+        name,
+        twitter: twitter_username,
       };
     } catch (error) {
       return {
-        html_url: '',
+        url: '',
         name: '',
-        twitter_username: '',
-        message: `${error}`,
+        twitter: '',
       };
     }
   }
