@@ -2,11 +2,15 @@ import { Injectable } from '@nestjs/common';
 import * as nodemailer from 'nodemailer';
 import { Mailer } from './mailer.interface';
 
+interface ResultInterface {
+  message: string;
+}
+
 @Injectable()
 export default class MailerService {
-  static async getHello(mailer: Mailer): Promise<string> {
-    if (mailer.token !== `${process.env.TOKEN}`) {
-      return 'Bad Send';
+  async getHello(mailer: Mailer): Promise<ResultInterface> {
+    if (mailer.token !== process.env.TOKEN) {
+      return { message: 'Bad Send' };
     }
 
     try {
@@ -26,10 +30,9 @@ export default class MailerService {
         subject: 'お問合せ',
         html: `<p>${mailer.name}様。<br><br>この度はお問合せいただき、ありがとうございます。<br><br>以下、お問合せ内容です。<br>---------------------------------------------<br>${mailer.message}</p>`,
       });
-
-      return result.response;
+      return { message: result.response };
     } catch (err) {
-      return err.string;
+      return { message: err };
     }
   }
 }

@@ -3,10 +3,15 @@ import { Response } from 'express';
 import { Mailer } from './mailer.interface';
 import MailerService from './mailer.service';
 
-@Controller()
+@Controller('mailer')
 export default class MailerController {
-  @Post('mailer')
-  static async findAll(@Body() mailer: Mailer, @Res() res: Response) {
-    res.status(HttpStatus.OK).json(await MailerService.getHello(mailer));
+  constructor(private readonly mailerService: MailerService) {}
+
+  @Post()
+  async findAll(@Body() mailer: Mailer, @Res() res: Response) {
+    const result = await this.mailerService.getHello(mailer);
+    await new Promise<string>(() => {
+      res.status(HttpStatus.OK).json(result);
+    });
   }
 }
